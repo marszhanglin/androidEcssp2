@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#00000000"
+    android:orientation="vertical" >
+    
+<include layout="@layout/line"/>
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    >
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_marginRight="35dp"
+        android:orientation="vertical"
+        android:layout_margin="10dp" > 
+      <TextView
+            android:id="@+id/resource_list_item13_tv_4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:text="所属机构："
+            style="@style/medium_text" />
+         
+         <RelativeLayout 
+             android:layout_height="70dp"
+             android:layout_width="wrap_content"
+             android:layout_marginTop="10dp"
+             >
+         <TextView
+            android:id="@+id/resource_list_item13_tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"  
+            android:singleLine="true" 
+            android:text="资源名称:" 
+            style="@style/title_text"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="10dp" /> 
+            
+        <ImageView android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:background="@drawable/event_item_image"/>
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_alignParentBottom="true"
+		    android:layout_marginLeft="60dp"
+		    android:layout_marginBottom="20dp"
+		    android:gravity="left"
+		    >
+		    <TextView
+            android:layout_width="68dp"
+            android:layout_height="match_parent" 
+            android:text="资源类别："
+            style="@style/medium_text" />
+		    <TextView
+            android:id="@+id/resource_list_item13_tv_2"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"  
+            style="@style/medium_text"
+            android:textColor="#ea5a2a"  />
+        	<TextView 
+            android:layout_width="68dp"
+            android:layout_height="match_parent" 
+            android:text="所属区域："
+            style="@style/medium_text" />
+            <TextView
+            android:id="@+id/resource_list_item13_tv_3"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"  
+            style="@style/medium_text" />
+		    
+		</LinearLayout>
+        
+             
+         </RelativeLayout>
+
+                
+
+            
+    </LinearLayout>
+    <ImageView       android:layout_width="10dp"
+			         android:layout_height="16dp"
+			         android:background="@drawable/linnelayout_r_btn_blue"
+			         android:layout_alignParentRight="true"
+			         android:layout_centerVertical="true"
+			         android:layout_marginRight="10dp"
+			         />
+    
+</RelativeLayout>
+   
+<include layout="@layout/line"/> 
+</LinearLayout>

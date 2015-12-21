@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00000000"
+    android:orientation="vertical" >
+
+    <include layout="@layout/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginRight="35dp"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/list_item13_tv_4"
+                style="@style/medium_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="完成期限：" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/list_item13_tv_1"
+                    style="@style/title_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:text="任务名称:" />
+
+                <ImageView
+                    android:layout_width="51dp"
+                    android:layout_height="51dp"
+                    android:background="@drawable/event_item_image" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="60dp"
+                    android:gravity="left"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/medium_text"
+                        android:layout_width="68dp"
+                        android:layout_height="match_parent"
+                        android:text="负责单位：" />
+
+                    <TextView
+                        android:id="@+id/list_item13_tv_2"
+                        style="@style/medium_text"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ea5a2a" />
+
+                    <TextView
+                        style="@style/medium_text"
+                        android:layout_width="68dp"
+                        android:layout_height="match_parent"
+                        android:text="负责人：" />
+
+                    <TextView
+                        android:id="@+id/list_item13_tv_3"
+                        style="@style/medium_text"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:textColor="#ea5a2a" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/linnelayout_r_btn_blue" />
+    </RelativeLayout>
+
+    <include layout="@layout/line" />
+
+</LinearLayout>

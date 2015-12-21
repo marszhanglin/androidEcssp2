@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC"
+    android:clickable="false" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="fh" >
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/title_btn_back_blue"
+                android:onClick="fh" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="任务信息"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        
+   <RelativeLayout 
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:onClick="fkhistroy"
+    >
+<ImageView 
+    android:id="@+id/event_name_add_yesbtn"
+    android:layout_width="135dp"
+    android:layout_height="20dp"
+    android:background="@drawable/fankui_history_btn"
+    android:layout_centerVertical="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="10dp"
+    android:onClick="fkhistroy"
+    />
+ </RelativeLayout>
+        
+    </RelativeLayout>
+	
+	
+	
+	    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="55dp"
+        android:clickable="false" > 
+             <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:clickable="false" >
+
+            <include layout="@layout/line"/>  
+	    	<!-- 任务名称 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="任务名称"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <EditText 
+                    android:id="@+id/taskadd_taskname_et"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:editable="false"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+				    	<!-- 任务状态 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp"> 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="任务状态"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_state_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+			
+			<!-- 完成期限 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" 
+              android:id="@+id/taskadd_taskeffi_ll"
+			  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="完成期限"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_taskeffi_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+			<!-- 关键说明 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="责  任  人"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_taskpersonid_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            
+           
+           <include layout="@layout/line_mlr"/>
+						<!-- 任务内容 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="90dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="任务内容"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_taskcontern_et"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+			<include layout="@layout/line_mlr"/>
+						<!-- 备注 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="90dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="备        注"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_remark_et"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+						<!-- 关键说明 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="90dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="关键说明"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/taskadd_keyword_et"
+                    android:layout_width="220dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+             
+            <include layout="@layout/line"/>  
+        </LinearLayout>
+        
+           
+       
+    </ScrollView>
+	
+
+     <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_bar_blue"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+
+            <ImageButton
+                android:layout_width="177dp"
+                android:layout_height="44dp"
+                android:background="@drawable/fankui_btn_blue_xml"
+                android:onClick="fk" />
+             
+    </RelativeLayout>
+
+</RelativeLayout>

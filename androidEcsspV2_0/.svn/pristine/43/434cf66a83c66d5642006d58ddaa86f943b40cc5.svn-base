@@ -1,0 +1,283 @@
+/*
+ * Copyright (c) 2005, 2014, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ */
+package net.evecom.androidecssp.activity.taskresponse;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.activity.pub.PersonSearchActivity;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+
+import org.apache.http.client.ClientProtocolException;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+/**
+ * 
+ * 描述 添加任务
+ * @author Mars zhang
+ * @created 2015-11-12 上午10:15:43
+ */
+public class TaskAddActivity extends BaseActivity {
+    
+	private EditText tasknameeditText;   //taskadd_taskname_et
+	private EditText contenteditText;    // taskadd_taskcontern_et
+	private EditText remarkeditText;    //taskadd_remark_et
+	private EditText keywordeditText;    //taskadd_keyword_et
+	private TextView stateView;           //taskadd_state_tv
+	private TextView taskeffiView;           //taskadd_taskeffi_tv
+	private TextView taskpersonidView;           //taskadd_taskpersonid_tv
+	private LinearLayout  taskeffilinearLayout;         //taskadd_taskeffi_ll
+	private BaseModel eventInfo;
+	private BaseModel projectInfo;
+
+	HashMap<String, String> statevalueKeyMap=new HashMap<String, String>();
+	HashMap<String, String> valueKeyMap=new HashMap<String, String>();
+	private String saveResult = "";
+	
+	private Calendar calendar;
+	public boolean istimePicked =false;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.task_add_activity);
+		Intent intent = getIntent();
+		eventInfo = (BaseModel) getData("eventInfo", intent);
+		projectInfo = (BaseModel) getData("projectInfo", intent);
+		init();
+		initdata();
+	}
+	
+	private void init() {
+	    
+	    tasknameeditText = (EditText) findViewById(R.id.taskadd_taskname_et);
+	    contenteditText = (EditText) findViewById(R.id.taskadd_taskcontern_et);
+	    remarkeditText = (EditText) findViewById(R.id.taskadd_remark_et);
+	    keywordeditText = (EditText) findViewById(R.id.taskadd_keyword_et);
+	    
+	    
+	    stateView = (TextView) findViewById(R.id.taskadd_state_tv);
+	    taskeffiView = (TextView) findViewById(R.id.taskadd_taskeffi_tv);
+	    taskpersonidView = (TextView) findViewById(R.id.taskadd_taskpersonid_tv);
+	    
+	    taskeffilinearLayout = (LinearLayout) findViewById(R.id.taskadd_taskeffi_ll);
+	    
+	    calendar = Calendar.getInstance(); 
+	    taskeffiView.setText(  calendar.get(Calendar.YEAR)+"-"
+	    + calendar.get(Calendar.MONTH)+"-"
+	    + calendar.get(Calendar.DAY_OF_MONTH)+" "
+	    + calendar.get(Calendar.HOUR_OF_DAY) + ":" 
+	    + calendar.get(Calendar.MINUTE));
+	    
+	    
+	    taskeffilinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                new DatePickerDialog(instance, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker arg0, int year, int monthOfYear, int dayOfMonth) {
+                        taskeffiView.setText("" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth + " 00:00");
+                        if (!istimePicked) {
+                            istimePicked = true;
+                            new TimePickerDialog(instance, new TimePickerDialog.OnTimeSetListener() {
+                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                    String tasteffivalue = taskeffiView.getText().toString();
+                                    String[]  strs= tasteffivalue.split(" ");
+                                    taskeffiView.setText("");
+                                    taskeffiView.setText(strs[0] + " " + hourOfDay + ":" + minute);
+                                    istimePicked = false;
+                                }
+                            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
+
+                        }
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+                        .show();
+            }
+        });
+	}
+	
+	private void initdata() {
+		getDict("PLAN_EVENT_TASK_STATE",statevalueKeyMap);
+	}
+
+	
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case R.layout.people_search_at: 
+		    BaseModel  personinfo=(BaseModel) getData("personinfo", data);
+		    if(null!=personinfo){
+		        valueKeyMap.put(personinfo.getStr("name"), personinfo.getStr("id"));
+	            valueKeyMap.put("taskdeptid", personinfo.getStr("orgid"));
+	            valueKeyMap.put("taskdept", personinfo.getStr("orgname"));
+	            taskpersonidView.setText(personinfo.getStr("name"));
+		    }
+			break;
+		case 2: 
+			break;
+		default:
+			break;
+		} 
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	/**
+	 * 保存提交
+	 */
+	private void submit() {
+		// 校验
+		if (tasknameeditText.getText().toString().trim().length() == 0) {
+			DialogToast("请输入任务名称",null);
+			return ;
+		}
+		if (stateView.getText().toString().trim().length() == 0) {
+            DialogToast("请选择任务状态",null);
+            return ;
+        }
+		if (taskeffiView.getText().toString().trim().length() == 0) {
+            DialogToast("请选择完成期限",null);
+            return ;
+        }
+		if (taskpersonidView.getText().toString().trim().length() == 0) {
+            DialogToast("请选择责任人",null);
+            return ;
+        }
+		
+		
+		
+		HashMap<String, String> hashMap=new HashMap<String, String>();
+        hashMap.put("planEventTask.planId", projectInfo.get("planid")+"");
+        hashMap.put("planEventTask.projectId", projectInfo.get("id")+"");
+        hashMap.put("planEventTask.eventId", projectInfo.get("eventid")+"");
+        hashMap.put("planEventTask.taskName", tasknameeditText.getText().toString());
+        hashMap.put("planEventTask.state", statevalueKeyMap.get(stateView.getText().toString()));
+        hashMap.put("planEventTask.taskEffi", taskeffiView.getText().toString() );
+        hashMap.put("planEventTask.taskPersonId", valueKeyMap.get(taskpersonidView.getText().toString()));
+        hashMap.put("planEventTask.taskPerson", taskpersonidView.getText().toString());
+        hashMap.put("planEventTask.taskContern", contenteditText.getText().toString());
+        hashMap.put("planEventTask.remark", remarkeditText.getText().toString());
+        hashMap.put("planEventTask.keyword", keywordeditText.getText().toString()); 
+        
+        hashMap.put("planEventTask.taskdeptid", valueKeyMap.get("taskdeptid"));
+        hashMap.put("planEventTask.taskdept", valueKeyMap.get("taskdept"));
+        
+        
+		postdata(hashMap);
+	}
+
+	private void postdata(final HashMap<String, String> entity) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Message message = new Message();
+				try {
+					saveResult = connServerForResultPost(
+							"jfs/ecssp/mobile/taskresponseCtr/Taskadd", entity);
+				} catch (ClientProtocolException e) {
+					message.what = MESSAGETYPE_02;
+					Log.e("mars", e.getMessage());
+				} catch (IOException e) {
+					message.what = MESSAGETYPE_02;
+					Log.e("mars", e.getMessage());
+				}
+				if (saveResult.length() > 0) {
+					message.what = MESSAGETYPE_01;  
+				} else {
+					message.what = MESSAGETYPE_02;
+				}
+				Log.v("mars", saveResult);
+				saveHandler.sendMessage(message);
+			}
+		}).start();
+
+	}
+
+	 
+
+	/**
+	 * 消息处理机制
+	 */
+	private Handler saveHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case MESSAGETYPE_01:// 文本保存成功 跳转至反馈列表 并提交图片资源
+				Intent intent = new Intent(getApplicationContext(),
+						TaskListActivity.class);
+				TaskListActivity.pushData("eventInfo", eventInfo, intent);
+                TaskListActivity.pushData("projectInfo", projectInfo, intent);
+				startActivity(intent);
+				finish();
+				break;
+			case MESSAGETYPE_02:
+				toast("请重新保存任务", 1);
+				break;
+			default:
+			    
+				break;
+			}
+		};
+	};
+
+	
+	public void state(View view) {
+	    final String[] strs =statevalueKeyMap.keySet().toArray(new String[statevalueKeyMap.size()]);
+	    Dialog dialog = new AlertDialog.Builder(TaskAddActivity.this)
+        .setIcon(R.drawable.qq_dialog_default_icon).setTitle("请选择级别")
+        .setItems(strs, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                stateView.setText(strs[which]);
+                dialog.dismiss();
+            }
+        }).create();
+	    dialog.show(); 
+	}
+	
+	/**
+	 * 
+	 * 描述 复制人
+	 * @author Mars zhang
+	 * @created 2015-11-13 下午2:25:46
+	 * @param view
+	 */
+	public void taskpersonid(View view) {
+	    Intent intent =new Intent(instance, PersonSearchActivity.class);
+//        Intent intent =new Intent(instance, DeptSearchActivity.class);
+        startActivityForResult(intent, R.layout.people_search_at);
+    }
+	
+	/**
+	 * 
+	 * 描述  保存
+	 * @author Mars zhang
+	 * @created 2015-11-13 下午2:25:34
+	 * @param view
+	 */
+	public void bc(View view) {
+		submit();
+	}
+}

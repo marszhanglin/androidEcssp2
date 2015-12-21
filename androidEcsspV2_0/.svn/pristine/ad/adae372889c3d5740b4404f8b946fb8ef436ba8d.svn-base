@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical"
+    android:clickable="false" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="应急综合指挥管理平台"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <!-- 机构 -->
+<LinearLayout 
+    android:layout_width="80dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:onClick="orgclick"
+    android:orientation="horizontal"
+    android:gravity="center|right"
+    >
+    <TextView 
+        android:id="@+id/main_menu_area_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="福建" 
+        android:gravity="center"
+        style="@style/main_menu_textstyle_title"
+        android:textColor="#2ffdff"
+        android:onClick="orgclick"
+        />
+<ImageView 
+    android:id="@+id/event_name_add_yesbtn"
+    android:layout_width="13dp"
+    android:layout_height="6.5dp"
+    android:background="@drawable/main_menu_org_btn"
+    android:layout_centerVertical="true"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="5dp"
+    android:onClick="orgclick"
+    />
+ </LinearLayout>
+        
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:orientation="horizontal"
+        android:clickable="false" >
+	<!-- 左 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#000"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            android:clickable="false" >
+            <!-- 突发事件信息 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#f9b511"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main1"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="突发事件信息"
+                    style="@style/main_menu_textstyle_title" />
+                <ImageView 
+                    android:layout_width="77dp"
+                    android:layout_height="53dp"
+                    android:background="@drawable/main_menu_129_1" 
+                    android:layout_gravity="center" 
+                    /> 
+            </LinearLayout>
+            
+            <!-- 事件上报 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#54b250"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main2"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="事件上报"
+                    style="@style/main_menu_textstyle_title" />
+                <ImageView 
+                    android:layout_width="66dp"
+                    android:layout_height="59dp"
+                    android:background="@drawable/main_menu_129_2" 
+                    android:layout_gravity="center" 
+                    /> 
+            </LinearLayout>
+            
+            
+            <!-- 现场处置 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#8b81f1"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main3"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="现场处置"
+                    style="@style/main_menu_textstyle_title" />
+                <ImageView 
+                    android:layout_width="57dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/main_menu_129_3" 
+                    android:layout_gravity="center" 
+                    /> 
+            </LinearLayout>
+            
+            <!-- 任务反馈 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ea575b"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main4"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="任务反馈"
+                    style="@style/main_menu_textstyle_title" />
+                <ImageView 
+                    android:layout_width="63dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/main_menu_129_4" 
+                    android:layout_gravity="center" 
+                    /> 
+            </LinearLayout>
+            <!-- 系统设置 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#3aabd9"
+                android:orientation="horizontal"
+                android:padding="13dp"
+                android:onClick="main5"
+                >
+                <ImageView 
+                    android:layout_width="63dp"
+                    android:layout_height="58dp"
+                    android:background="@drawable/main_menu_129_5" 
+                    android:layout_gravity="center"  
+                    /> 
+                    <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="系统设置"
+                    android:layout_gravity="center" 
+                    style="@style/main_menu_textstyle_title" />
+            </LinearLayout>
+        </LinearLayout>
+	<!-- 右 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#000"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            android:clickable="false" >
+            
+            <!-- 紧急通知 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#d067f6"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main6"
+                >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="紧急通知"
+                            style="@style/main_menu_textstyle_title" />
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="26dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/main_menu_129_6" />
+                    </LinearLayout>
+                    
+                    <TextView 
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="紧急通知紧急通知紧急通知紧急通知紧急通知紧急通知紧急通知紧急通知紧急通知紧急通知"
+                        style="@style/main_menu_textstyle_msg"
+                        />
+                
+            </LinearLayout> 
+            
+            <!-- 资源检索 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#4a93ef"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main7"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="资源检索"
+                    style="@style/main_menu_textstyle_title"/>
+                <ImageView 
+                    android:layout_width="66dp"
+                    android:layout_height="69dp"
+                    android:background="@drawable/main_menu_129_7" 
+                    android:layout_gravity="center"
+                    /> 
+            </LinearLayout>
+            
+            
+            <!-- 通讯录 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ff8d32"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="main8"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="通讯录"
+                    style="@style/main_menu_textstyle_title"/>
+                <ImageView 
+                    android:layout_width="66dp"
+                    android:layout_height="69dp"
+                    android:background="@drawable/main_menu_129_8" 
+                    android:layout_gravity="center"
+                    /> 
+            </LinearLayout>
+            
+            <!-- 退出系统 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#38be9d"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:onClick="main9"
+                >
+                <TextView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="退出系统"
+                    style="@style/main_menu_textstyle_title"/>
+                <ImageView 
+                    android:layout_width="66dp"
+                    android:layout_height="73dp"
+                    android:background="@drawable/main_menu_129_9" 
+                    android:layout_gravity="center"
+                    /> 
+            </LinearLayout> 
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

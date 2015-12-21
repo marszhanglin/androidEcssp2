@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/wgh_login_bj2" 
+    android:orientation="vertical"
+    android:clickable="false" >
+
+    <EditText
+        android:id="@+id/welcome_user_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="46dp" 
+        android:background="@drawable/login_name_ed"
+        android:hint="@string/welcome_qslyhm" 
+        android:saveEnabled="true"
+        android:paddingLeft="50.0sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="250dp"
+        android:textColor="#aaa"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/welcome_password_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp" 
+        android:background="@drawable/login_password_ed"
+        android:hint="@string/welcome_qslmm"
+        android:inputType="textPassword"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="8dp"
+        android:maxLength="20"
+        android:paddingLeft="50.0sp"
+        android:saveEnabled="true"
+        android:textColor="#aaa" />
+
+    <RelativeLayout
+        android:id="@+id/welcome_layout_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" 
+        android:layout_marginTop="8dp"
+        android:clickable="false"  >
+
+        <CheckBox
+            android:id="@+id/welcom_checkbox_jzmm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/welcome_jzmm"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:button="@drawable/login_check_box_bg_xml" 
+             />
+
+        <CheckBox
+            android:id="@+id/welcom_checkbox_zddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/welcome_zddr"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:button="@drawable/login_check_box_bg_xml" />
+         <TextView
+            android:id="@+id/welcom_regist_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_alignParentRight="true"
+            android:textColor="#fff"
+            android:textSize="14sp"  />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="17dp"  >
+
+        <Button
+            android:id="@+id/welcome_login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp" 
+            android:layout_weight="1"
+            android:background="@drawable/welcome_btn_login2_xml"
+            android:onClick="welcomelogin" />
+    </LinearLayout>
+
+</LinearLayout>

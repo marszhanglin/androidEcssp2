@@ -1,0 +1,236 @@
+/*
+ * Copyright (c) 2005, 2014, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ */
+package net.evecom.androidecssp.activity.taskresponse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+/**
+ * 
+ * 描述 处置项目列表
+ * 
+ * @author Mars zhang
+ * @created 2015-11-11 下午2:28:25
+ */
+public class ProjectListActivity extends BaseActivity {
+    /** MemberVariables */
+    private ListView projectListView = null;
+    /** MemberVariables */
+    private List<BaseModel> projectInfos = null;
+    /** MemberVariables */
+    private String resutArray = "";
+    /** MemberVariables */
+    private BaseModel eventInfo = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.project_list_at);
+        Intent intent = getIntent();
+        eventInfo = (BaseModel) getData("eventInfo", intent);
+        init();
+
+    }
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 下午2:04:56
+     */
+    private void init() {
+        projectListView = (ListView) findViewById(R.id.project_list_listView_1);
+        initlist();
+    }
+
+    /**
+     * 初始化列表
+     */
+    private void initlist() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = new Message();
+
+                try {
+                    HashMap<String, String> hashMap = new HashMap<String, String>();
+                    hashMap.put("eventId", eventInfo.get("id").toString());
+                    resutArray = connServerForResultPost("jfs/ecssp/mobile/taskresponseCtr/getAllProjectByeventId",
+                            hashMap);
+                } catch (ClientProtocolException e) {
+                    message.what = MESSAGETYPE_02;
+                    Log.e("mars", e.getMessage());
+                } catch (IOException e) {
+                    message.what = MESSAGETYPE_02;
+                    Log.e("mars", e.getMessage());
+                }
+                if (resutArray.length() > 0) {
+                    try {
+                        projectInfos = getObjsInfo(resutArray);
+                        if (null == projectInfos) {
+                            message.what = MESSAGETYPE_02;
+                        } else {
+                            message.what = MESSAGETYPE_01;
+                        }
+                    } catch (JSONException e) {
+                        message.what = MESSAGETYPE_02;
+                        Log.e("mars", e.getMessage());
+                    }
+                } else {
+                    message.what = MESSAGETYPE_02;
+                }
+                Log.v("mars", resutArray);
+                projectListHandler.sendMessage(message);
+
+            }
+        }).start();
+
+    }
+
+    /**
+     * eventListHandler
+     */
+    private Handler projectListHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGETYPE_01:// 数据请求成功画列表
+                    ProjectAdapter eventAdapter = new ProjectAdapter(getApplicationContext(), projectInfos);
+                    projectListView.setAdapter(eventAdapter);
+                    break;
+                case MESSAGETYPE_02:
+                    toast("暂无事件发生", 1);
+                    break;
+                default:
+                    break;
+            }
+
+        };
+    };
+
+    /**
+     * 解析事件json数据
+     * 
+     */
+    public static List<ProjectInfo> getjsons(String jsonString) throws JSONException {
+        List<ProjectInfo> list = new ArrayList<ProjectInfo>();
+        JSONArray jsonArray = null;
+        jsonArray = new JSONArray(jsonString);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            ProjectInfo projectInfo = new ProjectInfo();
+            projectInfo.setId(jsonObject.getString("id"));
+            projectInfo.setEventid(jsonObject.getString("eventid"));
+            projectInfo.setPlanid(jsonObject.getString("planid"));
+            projectInfo.setProjectname(jsonObject.getString("projectname"));
+            projectInfo.setCreatetime(jsonObject.getString("createtime"));
+            projectInfo.setProjectcode(jsonObject.getString("projectcode"));
+            list.add(projectInfo);
+        }
+        return list;
+    }
+
+    /**
+     * 匿名适ListView配器类
+     * 
+     * @author Mars zhang
+     */
+    public class ProjectAdapter extends BaseAdapter implements ListAdapter {
+        /** MemberVariables */
+        private Context context;
+        /** MemberVariables */
+        private LayoutInflater inflater;
+        /** MemberVariables */
+        private List<BaseModel> list;
+
+        public ProjectAdapter(Context context, List<BaseModel> list) {
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+            this.list = list;
+        }
+
+        @Override
+        public int getCount() {
+            return list == null ? 0 : list.size();
+
+        }
+
+        @Override
+        public Object getItem(int item) {
+            return this.list.get(item);
+        }
+
+        @Override
+        public long getItemId(int itemId) {
+            return itemId;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            if (null == view) {
+                view = inflater.inflate(R.layout.list_item_img_tv_img, null);
+            }
+            ImageView imageViewProjectCode = (ImageView) view.findViewById(R.id.list_item_img);
+            TextView textViewProjectName = (TextView) view.findViewById(R.id.list_item_tv);
+            if (list.get(i).get("projectcode").equals("F4_2")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_aqjj);
+            } else if (list.get(i).get("projectcode").equals("F4_3")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_ryjz);
+            } else if (list.get(i).get("projectcode").equals("F4_4")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_xcqx);
+            } else if (list.get(i).get("projectcode").equals("F4_5")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_yzps);
+            } else if (list.get(i).get("projectcode").equals("F4_6")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_ryss);
+            } else if (list.get(i).get("projectcode").equals("F4_7")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_xcjk);
+            } else if (list.get(i).get("projectcode").equals("F4_8")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_zjzc);
+            } else if (list.get(i).get("projectcode").equals("F4_9")) {
+                imageViewProjectCode.setImageResource(R.drawable.ljwg_dw_gzrz_aqjj);
+            }
+            textViewProjectName.setText(list.get(i).get("projectname").toString());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), TaskListActivity.class);
+                    TaskListActivity.pushData("eventInfo", eventInfo, intent);
+                    TaskListActivity.pushData("projectInfo", list.get(i), intent);
+                    startActivity(intent);
+                    Log.v("mars", "点击了列表" + list.get(i).get("projectname"));
+                }
+            });
+            return view;
+        }
+    }
+}
