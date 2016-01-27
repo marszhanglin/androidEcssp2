@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/cbj3"
+    android:orientation="vertical">
+	<EditText 
+	    android:id="@+id/dept_name_edit"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textColor="#000"
+	    android:textSize="15sp"
+	    android:layout_marginTop="10dp"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:singleLine="true"
+	    android:background="@drawable/login_editbox"
+	    android:hint="请输入机构名称"
+	     android:maxLength="10"/>
+	 	 
+	<RelativeLayout 
+	    android:id="@+id/search_for_qy3"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_below="@+id/dept_name_edit"
+	    >
+	     
+	     <Button
+	        android:id="@+id/search_for_qy_btn"
+	        android:layout_width="90dp"
+	        android:layout_height="40dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_alignParentRight="true"
+	        android:text="搜索"
+	        android:background="@drawable/btn_style_green"
+	        android:textColor="#ffffff"
+	        android:textSize="18sp" 
+	        android:onClick="searchonclick"
+	        />
+	</RelativeLayout>
+	<ListView android:id="@+id/search_for_dept_listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/search_for_qy3"
+            android:layout_marginTop="10dp"
+            android:clickable="true" 
+            android:cacheColorHint="#00000000" 
+            
+            android:dividerHeight="5dp" 
+            > </ListView>
+	<!-- android:divider="@color/bright_foreground_dark" -->
+</RelativeLayout>
+
+ 

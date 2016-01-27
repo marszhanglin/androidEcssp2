@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+            <RelativeLayout 
+  			android:layout_width="fill_parent"
+  			android:layout_height="45dp"
+  			android:id="@+id/title" 
+  			android:background="@drawable/title_bar"
+  			android:gravity="center_vertical"  >  
+  			<Button
+            android:id="@+id/one_group_contact_list_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="完成"
+            android:textSize="14sp"
+            android:textColor="#fff" 
+            android:background="@drawable/title_btn_back"
+            android:onClick="fh"
+		    />  
+      		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content" 
+        		android:text="照片(1/9)"
+        		android:layout_centerInParent="true"
+        		android:textSize="20sp"		
+				android:textColor="#ffffff"
+				android:id="@+id/picture_select_title"
+				/>  
+  <Button 
+			    android:id="@+id/contact_group_find"
+			    android:layout_width="23dp" 
+        		android:layout_height="19dp"
+        		android:layout_alignParentRight="true" 
+        		android:layout_centerVertical="true"
+        		android:layout_marginRight="15dp"
+        		android:textColor="#fff" 
+				android:background="@drawable/camera"
+				android:onClick="camera" 
+			    />   
+
+				
+		</RelativeLayout> 
+    
+    
+
+    <GridView
+        android:id="@+id/picture_select_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="20dip"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:verticalSpacing="20dip"
+        android:columnWidth="90dip"
+        android:numColumns="2" >
+    </GridView>
+
+</RelativeLayout>

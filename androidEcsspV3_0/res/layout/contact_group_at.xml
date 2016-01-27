@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    > 
+        <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:gravity="center_vertical" >
+		<RelativeLayout 
+		    android:layout_width="70dp"
+		    android:layout_height="match_parent"
+		    android:layout_alignParentLeft="true"
+		    android:onClick="fh"
+		    android:layout_centerVertical="true"
+		    >
+            <Button
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_btn_back_blue"
+            android:layout_marginLeft="17dp"
+             />
+       </RelativeLayout>
+        
+	<!-- android:text="返回"  android:textColor="#fff" android:textSize="14sp"-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="联系人分组"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+</RelativeLayout>
+	 
+	<LinearLayout
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:layout_marginTop="45dp"
+  	android:orientation="vertical"
+  	> 
+  	<TextView 
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="10dp"
+  	    android:background="#EFEEEC"
+  	    />
+  	<include layout="@layout/line"/> 
+  	<ListView android:id="@+id/contact_group_listView_1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:divider="#ffffff"
+            android:dividerHeight="2dp"
+            >
+
+        </ListView>
+</LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.evecom.androidecssp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+    <!-- 使用网络功能所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 获取电话状态imei -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 拨打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name="net.evecom.androidecssp.base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar" >
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.WelcomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.base.AfnailPictureActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.base.UploadPictureActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.gps.TDTLocation"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.gps.TDTLocation222"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.gps.EventItemizedOverlayActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.base.BaseWebActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.imagescan.PictureSelectActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.imagescan.ShowImageActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.imagescan.CameraActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.MainMenuActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.ProjectListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskAndResponsesInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.ResponseListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskResponseAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskResponseInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventNameAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventTypeActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.AsyDeptTreeActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.AsyAreaTreeActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.EmergencyNotification"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.SystemSetingActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.gps.ResourceItemizedOverlayActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.resource.ResourceInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        
+        
+        
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.ContactListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.ContactInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.ContactAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.ContactGroupActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.UserRegistActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.EventContinueActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.ContinueInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.event.ContinueAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.contact.AllGroupActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.inform.InformListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.inform.InformInfoActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        
+        
+        
+        
+        
+        <activity
+            android:name="net.evecom.androidecssp.activity.taskresponse.TaskAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.PersonSearchActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="net.evecom.androidecssp.activity.pub.DeptSearchActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        
+        
+        
+
+        <!-- 定位服务  android:persistent="true" -->
+        <service android:name="net.evecom.androidecssp.service.LocationService" />
+    </application>
+
+</manifest>
