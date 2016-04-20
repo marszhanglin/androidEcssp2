@@ -1,0 +1,304 @@
+/*
+ * Copyright (c) 2005, 2014, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ */
+package net.evecom.androidecssp.activity.pub;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.activity.contact.AllGroupActivity;
+import net.evecom.androidecssp.activity.event.EventAddActivity;
+import net.evecom.androidecssp.activity.event.EventListActivity;
+import net.evecom.androidecssp.activity.inform.InformListActivity;
+import net.evecom.androidecssp.activity.taskresponse.TaskListActivity;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+import net.evecom.androidecssp.gps.ResourceItemizedOverlayActivity;
+import net.evecom.androidecssp.util.ShareUtil;
+import net.evecom.androidecssp.view.autoscoll.AutoScollView;
+import net.mutil.util.AnimationUtil;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.TextView;
+
+/**
+ * 
+ * 描述
+ * 
+ * @author Mars zhang
+ * @created 2015-12-9 下午3:48:38
+ */
+public class MainMenuActivity extends BaseActivity {
+    /** MainMenuActivity实例 */
+    public static MainMenuActivity mainMenuActivityInstance = null;
+    /** MemberVariables */
+    private Intent intent = null;
+    /** MemberVariables */
+    private TextView areaTV = null;
+    /** MemberVariables */
+    private AutoScollView autoScollView = null;
+    /** MemberVariables */
+    private List<BaseModel> informs = null;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_menu_activity);
+        mainMenuActivityInstance = this;
+        areaTV = (TextView) findViewById(R.id.main_menu_area_tv_id);
+        areaTV.setText(ifnull(ShareUtil.getString(instance, "PASSNAME", "orgname", ""), ""));
+        autoScollView = (AutoScollView) findViewById(R.id.main_menu_at_as);
+        loadinforms();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { // back键
+
+        }
+        return false;
+    }
+    /**
+     * 
+     * 描述 
+     */
+    private void loadinforms() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                HashMap<String, String> map = new HashMap<String, String>();
+                String userId = ShareUtil.getString(getApplicationContext(), "PASSNAME", "userid", "0");
+                String resultArray = "";
+                try {
+                    map.put("searchStr", "");
+                    map.put("userid", userId);
+                    resultArray = connServerForResultPost("jfs/ecssp/mobile/informCtr/getInfromList", map);
+                } catch (ClientProtocolException e) {
+                    message.what = MESSAGETYPE_02;
+                } catch (IOException e) {
+                    message.what = MESSAGETYPE_02;
+                }
+                if (resultArray.length() > 0) {
+                    try {
+                        informs = getObjsInfo(resultArray);
+                        if (null == informs) {
+                            message.what = MESSAGETYPE_02;
+                        } else {
+                            message.what = MESSAGETYPE_01;
+                        }
+                    } catch (JSONException e) {
+                        message.what = MESSAGETYPE_02;
+                    }
+                } else {
+                    message.what = MESSAGETYPE_02;
+                }
+                informHandler.sendMessage(message);
+            }
+        }).start();
+    }
+    
+    /**
+     * informHandler
+     */
+    private Handler informHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGETYPE_01:
+                    if (null == informs)
+                        return;
+                    List<String> texts = new ArrayList<String>();
+                    for (int i = 0; i < informs.size(); i++) {
+                        String summary = ifnull(informs.get(i).get("summary"), "");
+                        if (summary.length() > 0)
+                            texts.add((i + 1) + "." + summary);
+                    }
+                    autoScollView.settexts(texts);
+                    break;
+                case MESSAGETYPE_02:
+
+                    break;
+                default:
+                    break;
+            }
+        };
+    };
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:12
+     * @param view
+     */
+    public void main1(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(getApplicationContext(), EventListActivity.class);
+        intent.putExtra("ifqueryallevents", true);
+//        intent = new Intent(getApplicationContext(), EmergencyNotification.class);
+        
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 事件上报
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:16
+     * @param view
+     */
+    public void main2(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(MainMenuActivity.this, EventAddActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 任务反馈
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:19
+     * @param view
+     */
+    public void main3(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(getApplicationContext(), EventListActivity.class);
+        intent.putExtra("ifqueryallevents", false);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 任务反馈
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:22
+     * @param view
+     */
+    public void main4(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(getApplicationContext(), TaskListActivity.class);
+        intent.putExtra("ifmytask", true);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 系统设置
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:25
+     * @param view
+     */
+    public void main5(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(MainMenuActivity.this, SystemSetingActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 紧急通知
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:28
+     * @param view
+     */
+    public void main6(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(MainMenuActivity.this, InformListActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 资源检索
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:31
+     * @param view
+     */
+    public void main7(View view) {
+        AnimationUtil.AniZoomIn(view);
+        // intent = new Intent(MainMenuActivity.this, BaseWebActivity.class);
+        intent = new Intent(MainMenuActivity.this, ResourceItemizedOverlayActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 通讯录
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:34
+     * @param view
+     */
+    public void main8(View view) {
+        AnimationUtil.AniZoomIn(view);
+        intent = new Intent(MainMenuActivity.this, AllGroupActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-12-9 上午10:34:37
+     * @param view
+     */
+    public void main9(View view) {
+        AnimationUtil.AniZoomIn(view);
+        finish();
+    }
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-12-15 上午8:42:48
+     */
+    public void orgclick(View view) {
+        Intent intent = new Intent(instance, TreeListActivity.class);
+        BaseActivity.pushObjData("title", "所属区域", intent);
+        BaseActivity.pushObjData("url", "jfs/ecssp/mobile/pubCtr/getAsyAreaTree", intent);
+        BaseActivity.pushObjData("rootid", "350000", intent);
+        BaseActivity.pushObjData("rootname", "福建省", intent);
+        startActivityForResult(intent, R.layout.tree_list_at);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case R.layout.tree_list_at:
+                String areaName = data.getStringExtra("nodeName");
+                String areaid = data.getStringExtra("nodeid");
+                if (null != areaName && areaName.length() > 0) {
+                    areaTV.setText(areaName);
+                }
+                break;
+
+            default:
+                break;
+        }
+
+    }
+}

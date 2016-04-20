@@ -1,0 +1,191 @@
+/*
+ * Copyright (c) 2005, 2014, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ */
+package net.evecom.androidecssp.activity.taskresponse;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.activity.pub.imagescan.PictureSelectActivity;
+import net.evecom.androidecssp.base.AfnailPictureActivity;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+import net.evecom.androidecssp.bean.FileManageBean;
+import net.evecom.androidecssp.view.gallery.GalleryFlow;
+import net.mutil.util.HttpUtil;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
+
+/**
+ * 
+ * 描述 任务反馈信息
+ * 
+ * @author Mars zhang
+ * @created 2015-11-12 上午10:15:43
+ */
+public class TaskResponseInfoActivity extends BaseActivity {
+    /** MemberVariables */
+    private TextView titleTV; // task_response_title_et
+    /** MemberVariables */
+    private TextView deptTV; // task_response_dept_et
+    /** MemberVariables */
+    private TextView contentTV; // task_response_content_et
+    /** MemberVariables */
+    // private TextView keywordTV; //task_response_keyword_et
+    /** MemberVariables */
+    private TextView leveView; // task_response_leve_tv
+    /** MemberVariables */
+    private TextView remarkeditText; // task_response_remark_et
+    /** MemberVariables */
+    private BaseModel responseinfo;
+    /** MemberVariables */
+    GalleryFlow mGallery = null;
+    /** MemberVariables */
+    private List<FileManageBean> filebeans = new ArrayList<FileManageBean>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.task_response_response_info_activity);
+        init();
+        initdata();
+    }
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 下午2:07:42
+     */
+    private void init() {
+        titleTV = (TextView) findViewById(R.id.task_response_title_et);
+        deptTV = (TextView) findViewById(R.id.task_response_dept_et);
+        contentTV = (TextView) findViewById(R.id.task_response_content_et);
+        // keywordTV = (TextView) findViewById(R.id.task_response_keyword_et);
+        leveView = (TextView) findViewById(R.id.task_response_leve_tv);
+        remarkeditText = (TextView) findViewById(R.id.task_response_remark_et);
+    }
+
+    /**
+     * 
+     * 描述
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 下午2:07:52
+     */
+    private void initdata() {
+        Intent intent = getIntent();
+        responseinfo = (BaseModel) getData("responseinfo", intent);
+        setDictNameByValueToView("PLAN_EVENTTASK_RESPONSE_LEVEL", ifnull(responseinfo.get("responselevel"), ""),
+                leveView); 
+        String mfileids = responseinfo.getStr("detailattach");
+        if(!"null".equals(mfileids)){
+            String[] mids = mfileids.split(",");
+            for (int i = 0; i < mids.length; i++) {
+                FileManageBean fileManageBean = new FileManageBean();
+                fileManageBean.setFileby1(mids[i]);
+                filebeans.add(fileManageBean);
+            }
+        }
+        
+
+        titleTV.setText(ifnull(responseinfo.get("responsetitle"), ""));
+        deptTV.setText(ifnull(responseinfo.get("name"), "") + "(" + ifnull(responseinfo.get("responsename"), "") + ")");
+        contentTV.setText(ifnull(responseinfo.get("responsecon"), ""));
+        // keywordTV.setText(ifnull(responseinfo.get(""), "")); 
+        remarkeditText.setText(ifnull(responseinfo.get("remark"), ""));
+        initGallery();
+    }
+
+    /**
+     * 
+     * 描述 初始化gallery
+     * 
+     * @author Mars zhang
+     * @created 2015-11-19 上午10:55:25
+     */
+    private void initGallery() {
+        mGallery = (GalleryFlow) findViewById(R.id.event_add_gallery_flow);
+        mGallery.setBackgroundColor(Color.parseColor("#ffffff")); // 背景色
+        mGallery.setSpacing(90);// 间距
+        mGallery.setMaxRotationAngle(20);// 设置倾斜角度
+        mGallery.setFadingEdgeLength(10); // 边框渐变宽度
+        mGallery.setGravity(Gravity.CENTER_VERTICAL); // 设置对齐方式
+        mGallery.setAdapter(new GalleryAdapter());
+        mGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AfnailPictureActivity.class);
+                BaseActivity.pushObjData("filebean", filebeans.get(position), intent);
+                startActivityForResult(intent, R.layout.afnail_picture_activity);
+            }
+        });
+    }
+
+    /**
+     * 
+     * 描述 选择文件点击
+     * 
+     * @author Mars zhang
+     * @created 2015-11-23 下午2:14:11
+     * @param view
+     */
+    /*public void choose_image(View view) {
+        Intent intent = new Intent(instance, PictureSelectActivity.class);
+        startActivityForResult(intent, R.layout.picture_select_at);
+    }*/
+
+    /**
+     * 
+     * 描述 gallery的适配器
+     * 
+     * @author Mars zhang
+     * @created 2015-11-19 上午11:05:15
+     */
+    private class GalleryAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return filebeans.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (null == convertView) {
+                convertView = new ImageView(instance);
+                convertView.setLayoutParams(new Gallery.LayoutParams(160, 240));// 控件的大小
+            }
+            ImageView imageView = (ImageView) convertView;
+            HashMap<String, String> mparas = new HashMap<String, String>();
+            mparas.put("fileid", filebeans.get(position).getFileby1());
+            displayImage(imageView, HttpUtil.getPCURL() + "jfs/ecssp/mobile/pubCtr/getImageFlowById", mparas);
+            imageView.setScaleType(ScaleType.FIT_XY);
+            return imageView;
+        }
+    }
+}

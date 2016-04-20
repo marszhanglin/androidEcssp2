@@ -1,0 +1,236 @@
+/*
+ * Copyright (c) 2005, 2015, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ *
+ */
+package net.evecom.androidecssp.activity.event;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.activity.contact.ContactListActivity;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+import net.evecom.androidecssp.bean.FileManageBean;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+/**
+ * 
+ * 描述
+ * 
+ * @author Stark Zhou
+ * @created 2015-12-30 下午4:00:00
+ */
+public class EventContinueActivity extends BaseActivity {
+    /** continueList */
+    private ListView continueList = null;
+    /** eventContinue */
+    private List<BaseModel> eventContinue = new ArrayList<BaseModel>();
+    /** monitorType */
+    private List<BaseModel> monitorType = new ArrayList<BaseModel>();
+    /** resultArray */
+    private String resultArray = "";
+    /** resultArray1 */
+    private String resultArray1 = "";
+    /** continueAdapter */
+    private ContinueAdapter continueAdapter = null;
+    /** eventInfo */
+    private BaseModel eventInfo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.event_continue_at);
+        Intent intent = getIntent();
+        eventInfo = (BaseModel) getData("eventInfo", intent);
+        init();
+    }
+
+    /**
+     * 
+     * 初始化
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:34:25
+     */
+    private void init() {
+        continueList = (ListView) findViewById(R.id.event_continue_listView_1);
+        initList();
+    }
+
+    /**
+     * 
+     * 初始化列表
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:34:25
+     */
+    private void initList() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                try {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("eventid", eventInfo.getStr("id"));
+                    resultArray = connServerForResultPost("jfs/ecssp/mobile/eventContinueCtr/getEventContinue", map);
+                    // 指标返回值
+                    resultArray1 = connServerForResultPost("jfs/ecssp/mobile/eventContinueCtr/getEventMonitor", map);
+                } catch (ClientProtocolException e) {
+                    message.what = MESSAGETYPE_02;
+                } catch (IOException e) {
+                    message.what = MESSAGETYPE_02;
+                }
+                if (resultArray.length() > 0) {
+                    try {
+                        eventContinue = getObjsInfo(resultArray);
+                        monitorType = getObjsInfo(resultArray1);
+                        if (null == eventContinue||eventContinue.size()==0) {
+
+                            message.what = MESSAGETYPE_02;
+                        } else {
+                            message.what = MESSAGETYPE_01;
+                        }
+                    } catch (JSONException e) {
+                        message.what = MESSAGETYPE_02;
+                    }
+                } else {
+                    message.what = MESSAGETYPE_02;
+                }
+                eventContinueHandler.sendMessage(message);
+
+            }
+        }).start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+        // 新增返回结果
+            case R.layout.event_continue_add:
+                boolean isSave = data.getBooleanExtra("isSave", false);
+                if (isSave) {
+                    initList();
+                    continueAdapter.notifyDataSetChanged();
+                }
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 
+     * 跳转到新增
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:34:55
+     * @param view
+     */
+    public void continueAdd(View view) {
+        Intent intent = new Intent(instance, ContinueAddActivity.class);
+        EventContinueActivity.pushData("eventInfo", eventInfo, intent);
+        EventContinueActivity.pushObjData("monitorType", monitorType, intent);
+        startActivityForResult(intent, R.layout.event_continue_add);
+    }
+
+    /**
+     * 消息处理器
+     */
+    private Handler eventContinueHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGETYPE_01:// 数据请求成功画列表
+                    continueAdapter = new ContinueAdapter(getApplicationContext(), eventContinue);
+                    continueList.setAdapter(continueAdapter);
+                    break;
+                case MESSAGETYPE_02:
+                    toast("暂无续报事件", 1);
+                    break;
+                default:
+                    break;
+            }
+
+        };
+    };
+
+    /**
+     * 
+     * 匿名适配器
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:35:54
+     */
+    public class ContinueAdapter extends BaseAdapter implements ListAdapter {
+        /** MemberVariables */
+        private Context context;
+        /** MemberVariables */
+        private LayoutInflater inflater;
+        /** MemberVariables */
+        private List<BaseModel> list;
+
+        /** GroupAdapter */
+        public ContinueAdapter(Context context, List<BaseModel> list) {
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+            this.list = list;
+        }
+
+        @Override
+        public int getCount() {
+            return list == null ? 0 : list.size();
+
+        }
+
+        @Override
+        public Object getItem(int item) {
+            return this.list.get(item);
+        }
+
+        @Override
+        public long getItemId(int itemId) {
+            return itemId;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            if (null == view) {
+                view = inflater.inflate(R.layout.event_continue_item, null);
+            }
+            TextView continueName = (TextView) view.findViewById(R.id.continue_list_item_1);
+            continueName.setText("" + list.get(i).get("coutinuename"));
+            TextView eventName = (TextView) view.findViewById(R.id.continue_list_item_2);
+            eventName.setText("续报时间：" + ifnull(list.get(i).get("reporterdate"), ""));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(instance, ContinueInfoActivity.class);
+                    ContactListActivity.pushData("continueInfo", list.get(i), intent);
+                    ContactListActivity.pushData("eventInfo", eventInfo, intent);
+                    startActivity(intent);
+                }
+            });
+            return view;
+        }
+    }
+
+}

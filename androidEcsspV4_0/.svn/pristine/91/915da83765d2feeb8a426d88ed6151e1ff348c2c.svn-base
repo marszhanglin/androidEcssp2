@@ -1,0 +1,402 @@
+/*
+ * Copyright (c) 2005, 2015, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ *
+ */
+package net.evecom.androidecssp.activity.contact;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+import net.evecom.androidecssp.util.ShareUtil;
+import net.mutil.util.AnimationUtil;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+/**
+ * 描述
+ * 
+ * @author Stark Zhou
+ * @created 2015-11-16 下午2:06:54
+ */
+public class AllGroupActivity extends BaseActivity {
+    /** contactGroupView */
+    private ListView contactGroupView = null;
+    /** groups */
+    private List<BaseModel> groups = null;
+    /** ranks */
+    private List<BaseModel> ranks = new ArrayList<BaseModel>();
+    /** resutArray */
+    private String resutArray = "";
+    /** group */
+    private BaseModel group;
+    /** groupId */
+    private String groupId;
+    /** groupAdapter */
+    private GroupAdapter groupAdapter;
+    /** groupBottom */
+    private ImageView groupBottom;
+    /** lastGroup */
+    private List<BaseModel> lastGroup;
+    /** rank */
+    private int rank;
+    /** 分组checkbox*/
+    private CheckBox groupCheck;
+    /**选择分组按钮*/
+    private ImageView groupSelect;
+    /**已选分组数组*/
+    private List<BaseModel> checkedGroups;
+    /**已选分组map*/
+    private HashMap<Integer, Boolean> checkMap = new HashMap<Integer, Boolean>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.all_group_at);
+        Intent intent = getIntent();
+        group = (BaseModel) getData("group", intent);
+        lastGroup = new ArrayList<BaseModel>();
+        checkedGroups = new ArrayList<BaseModel>();
+        groupBottom = (ImageView) findViewById(R.id.group_bottom);
+        contactGroupView = (ListView) findViewById(R.id.all_group_listView_1);
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.group_bottom_block);
+
+        groupSelect = (ImageView) findViewById(R.id.group_select_btn);
+        // 判断若为第一层分组则不显示下一级按钮
+        if (group != null) {
+            groupId = group.getStr("id");
+        } else {
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) contactGroupView.getLayoutParams();
+            lp.setMargins(0, 0, 0, 0);
+            contactGroupView.setLayoutParams(lp);
+            rl.setVisibility(View.GONE);
+
+            groupSelect.setVisibility(View.GONE);
+        }
+        init();
+    }
+    /**
+     * 
+     * 确定分组按钮
+     *
+     * @author Stark Zhou
+     * @created 2016-3-31 下午5:28:45
+     * @param v
+     */
+    public void ingroup(View v) {
+        Iterator it = checkMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            Boolean v1 = (Boolean) entry.getValue();
+            int k = (Integer) entry.getKey();
+            if (v1) {
+                checkedGroups.add(groups.get(k));
+            }
+        }
+        Intent intent = new Intent();
+        BaseActivity.pushObjData("group", checkedGroups, intent);
+        setResult(4, intent);
+        finish();
+    }
+
+    /**
+     * 
+     * 初始化
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:22:16
+     */
+    private void init() {
+
+        initlist();
+
+        groupBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                // 级别大于2的分组返回上一级。否则返回联系人列表
+                if (rank > 2) {
+                    group = lastGroup.get(lastGroup.size() - 1);
+                    lastGroup.remove(lastGroup.size() - 1);
+                    initlist();
+                    groupAdapter.notifyDataSetChanged();
+                } else {
+                    Intent intent = new Intent();
+                    setResult(4, intent);
+                    finish();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 
+     * 重写返回方法
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:23:38
+     * @param view
+     */
+    public void back(View view) {
+        Intent intent = new Intent();
+        setResult(4, intent);
+        finish();
+    }
+
+    /**
+     * 
+     * 重写返回方法
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:23:38
+     * @param view
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            Intent intent = new Intent();
+            setResult(4, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 初始化列表
+     */
+    private void initlist() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                HashMap<String, String> map = new HashMap<String, String>();
+                try {
+                    // 判断是否有分组条件
+                    if (group != null) {
+                        groupId = group.get("id");
+                        map.put("groupid", groupId);
+                        resutArray = connServerForResultPost("jfs/ecssp/mobile/contactCtr/getGroupByParentId", map);
+                    } else {
+                        String userId = ShareUtil.getString(getApplicationContext(), "PASSNAME", "userid", "0");
+                        map.put("userid", userId);
+                        resutArray = connServerForResultPost("jfs/ecssp/mobile/contactCtr/getGroupList", map);
+                    }
+                } catch (ClientProtocolException e) {
+                    message.what = MESSAGETYPE_02;
+                    Log.e("mars", e.getMessage());
+                } catch (IOException e) {
+                    message.what = MESSAGETYPE_02;
+                    Log.e("mars", e.getMessage());
+                }
+                if (resutArray.length() > 0) {
+                    try {
+                        groups = getObjsInfo(resutArray);
+                        rank = groups.get(0).getInt("rank");
+                        // 建立未分组，添加到list的第一行
+                        if (rank == 1) {
+                            BaseModel emptyGroup = new BaseModel();
+                            emptyGroup.set("name", "未分组");
+                            emptyGroup.set("rank", 1);
+                            emptyGroup.set("isleaf", "1");
+                            emptyGroup.set("id", null);
+                            groups.add(0, emptyGroup);
+                        }
+                        if (null == groups) {
+                            message.what = MESSAGETYPE_02;
+                        } else {
+                            message.what = MESSAGETYPE_01;
+                        }
+                    } catch (JSONException e) {
+                        message.what = MESSAGETYPE_02;
+                        Log.e("stark", e.getMessage());
+                    }
+                } else {
+                    message.what = MESSAGETYPE_02;
+                }
+                Log.v("mars", resutArray);
+                contactGroupHandler.sendMessage(message);
+
+            }
+        }).start();
+    }
+
+    /**
+     * 消息处理器
+     */
+    private Handler contactGroupHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGETYPE_01:// 数据请求成功画列表
+                    groupAdapter = new GroupAdapter(getApplicationContext(), groups);
+                    contactGroupView.setAdapter(groupAdapter);
+                    ranks.add(group);
+                    break;
+                case MESSAGETYPE_02:
+                    toast("暂无事件发生", 1);
+                    break;
+                default:
+                    break;
+            }
+
+        };
+    };
+
+    /**
+     * 
+     * 分组列表适配器
+     * 
+     * @author Stark Zhou
+     * @created 2015-12-30 下午2:25:12
+     */
+    public class GroupAdapter extends BaseAdapter implements ListAdapter {
+        /** MemberVariables */
+        private Context context;
+        /** MemberVariables */
+        private LayoutInflater inflater;
+        /** MemberVariables */
+        private List<BaseModel> list;
+
+        public GroupAdapter(Context context, List<BaseModel> list) {
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+            this.list = list;
+        }
+
+        @Override
+        public int getCount() {
+            return list == null ? 0 : list.size();
+
+        }
+
+        @Override
+        public Object getItem(int item) {
+            return this.list.get(item);
+        }
+
+        @Override
+        public long getItemId(int itemId) {
+            return itemId;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            if (null == view) {
+                view = inflater.inflate(R.layout.contact_group_item, null);
+            }
+            RelativeLayout grpTocon = (RelativeLayout) view.findViewById(R.id.group_to_contact);
+            TextView textViewGroupName = (TextView) view.findViewById(R.id.contact_group_item);
+            groupCheck = (CheckBox) view.findViewById(R.id.group_check);
+            // groupCheck.setOnCheckedChangeListener(null);
+            //设置不同分组颜色
+            if (list.get(i).get("name").toString().equals("未分组") == false) {
+                if (list.get(i).get("ownerid").toString().equals("null")) {
+                    textViewGroupName.setTextColor(0xffea5a2a);
+                } else
+                    textViewGroupName.setTextColor(android.graphics.Color.BLACK);
+            }
+            textViewGroupName.setText("" + list.get(i).get("name"));
+            if (list.get(i).get("rank").toString().equals("1")) {
+                groupCheck.setVisibility(View.GONE);
+            }
+            ImageView groupImg = (ImageView) view.findViewById(R.id.group_item_img);
+            groupImg.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    if (list.get(i).get("rank").toString().equals("1")) {
+                        Intent intent = new Intent(instance, ContactListActivity.class);
+                        BaseActivity.pushData("group", list.get(i), intent);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent();
+                        checkedGroups.add(list.get(i));
+                        BaseActivity.pushObjData("group", checkedGroups, intent);
+                        setResult(4, intent);
+                        finish();
+                    }
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 如果为第一级则create联系人列表
+                    if (list.get(i).get("rank").toString().equals("1")) {
+                        Intent intent = new Intent(instance, ContactListActivity.class);
+                        BaseActivity.pushData("group", list.get(i), intent);
+                        startActivity(intent);
+                    }
+                    // 如果不是最细级则继续展开下一级
+                    else if (list.get(i).get("isleaf").toString().equals("0")) {
+                        if (group != null) {
+                            lastGroup.add(group);
+                        }
+                        group = list.get(i);
+                        initlist();
+                        groupAdapter.notifyDataSetChanged();
+                    } /*
+                       * else {// 否则返回数据到联系人列表 Intent intent = new Intent();
+                       * checkedGroups.add(list.get(i));
+                       * BaseActivity.pushObjData("group",checkedGroups,
+                       * intent); setResult(4, intent); finish(); }
+                       */
+                }
+            });
+
+            groupCheck.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
+                    if (isChecked) {
+                        checkMap.put(i, true);
+                    } else {
+                        checkMap.put(i, false);
+                    }
+                }
+            });
+
+            // 组到联系人按钮监听器
+            /*
+             * grpTocon.setOnClickListener(new View.OnClickListener() {
+             * 
+             * @Override public void onClick(View arg0) { // 如果为第一级则进入联系人列表 if
+             * (list.get(i).get("rank").toString().equals("1")) { Intent intent
+             * = new Intent(instance, ContactListActivity.class);
+             * BaseActivity.pushData("group", list.get(i), intent);
+             * startActivity(intent); } // 否则进入返回数据到联系人列表 else { Intent intent =
+             * new Intent(); BaseActivity.pushData("group", list.get(i),
+             * intent); setResult(1, intent); finish(); } } });
+             */
+            return view;
+        }
+    }
+
+}

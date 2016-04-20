@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+    <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="50dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:background="#ffffff"
+       android:gravity="center_vertical"
+       android:layout_marginBottom="1dp" >
+
+        <ImageView
+            android:id="@+id/area_list_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="matrix"
+            android:background="@drawable/group_1" />
+        <TextView
+            android:id="@+id/area_list_name"
+            style="@style/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/area_list_img"
+            android:padding="8dp"
+            android:text="福州市"
+            android:textSize="17sp" />
+    
+    </RelativeLayout>
+    <TextView 
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="5dp"
+  	    android:background="#EFEEEC"
+  	    />
+
+</LinearLayout>

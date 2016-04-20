@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <include layout="@layout/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/task_response_info_textstyle_msg_color_999999"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:text="反馈部门:" />
+
+            <TextView
+                android:id="@+id/task_response_info_response_dept"
+                style="@style/task_response_info_textstyle_msg_color_999999"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:maxLength="7"
+                android:text="王五" />
+
+            <TextView
+                style="@style/task_response_info_textstyle_msg_color_999999"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="反馈时间:" />
+
+            <TextView
+                android:id="@+id/task_response_info_response_createtime"
+                style="@style/task_response_info_textstyle_msg_color_999999"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="145dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/task_response_info_response_name"
+                    style="@style/title_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/task_response_info_response_content"
+                    style="@style/task_response_info_textstyle_msg_14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="2"
+                    android:maxLines="2" />
+
+                <LinearLayout
+                    android:id="@+id/task_response_info_response_imagely"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:layout_weight="4"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <include layout="@layout/right_image_btn" />
+        </RelativeLayout>
+
+        <!-- 彩条 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linealayout_bottom_blue" >
+        </LinearLayout>
+
+        <include layout="@layout/line" />
+    </LinearLayout>
+
+</LinearLayout>

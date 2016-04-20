@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="fh" >
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/title_btn_back_blue"
+                android:onClick="fh" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="事发周边"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <!-- 资源 -->
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="resourcearound" >
+
+            <ImageView
+                android:id="@+id/event_name_add_yesbtn"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/resource_event_btn"
+                android:onClick="resourcearound" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.tianditu.android.maps.MapView
+        android:id="@+id/itemized_mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="45dp" />
+
+    <RelativeLayout
+        android:id="@+id/itemized_resource_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:background="#ffffff"
+        android:clickable="true"
+        android:visibility="gone" >
+
+        <ListView
+            android:id="@+id/itemized_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </RelativeLayout>
+
+</FrameLayout>

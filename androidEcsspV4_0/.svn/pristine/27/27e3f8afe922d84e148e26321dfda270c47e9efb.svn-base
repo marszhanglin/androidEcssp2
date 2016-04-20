@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC"
+    android:clickable="false" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="fh" >
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/title_btn_back_blue"
+                android:onClick="fh" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="bc" >
+
+            <ImageView
+                android:id="@+id/event_name_add_yesbtn"
+                android:layout_width="25dp"
+                android:layout_height="18dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/yes_btn" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="45dp"
+        android:clickable="false" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:clickable="false"
+                android:orientation="vertical" >
+
+                <include layout="@layout/line" />
+                <!-- 事件名称 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="事件名称" />
+
+                    <EditText
+                        android:id="@+id/event_name_add_name_ed"
+                        style="@style/medium_text"
+                        android:layout_width="220dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="90dp"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical|left"
+                        android:hint="请输入突发事件名称" />
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+                <!-- 事发地址 -->
+
+                <RelativeLayout
+                    android:id="@+id/event_name_add_addr_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:clickable="false" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="事发地址" />
+
+                    <EditText
+                        android:id="@+id/event_name_add_addr_ed"
+                        style="@style/medium_text"
+                        android:layout_width="220dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="90dp"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical|left"
+                        android:hint="请输入突发事发地址" />
+
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:onClick="dw" >
+
+                        <ImageButton
+                            android:id="@+id/event_name_add_dw_btn"
+                            android:layout_width="28dp"
+                            android:layout_height="35dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/dw_btn"
+                            android:onClick="dw" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+                <!-- 上  报  人 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="上  报  人" />
+
+                    <EditText
+                        android:id="@+id/event_name_add_name_bgr"
+                        style="@style/medium_text"
+                        android:layout_width="220dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="90dp"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical|left"
+                        android:hint="请输入上报人" />
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+                <!-- 联系电话 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="联系电话" />
+
+                    <EditText
+                        android:id="@+id/event_name_add_phone_ed"
+                        style="@style/medium_text"
+                        android:layout_width="220dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="90dp"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical|left"
+                        android:hint="请输入联系电话"
+                        android:phoneNumber="true" />
+                </RelativeLayout>
+
+                <include layout="@layout/line" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/event_name_add_content"
+                    style="@style/medium_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/content_ed"
+                    android:gravity="left"
+                    android:hint="请输入突发事件简要信息"
+                    android:lines="4"
+                    android:padding="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

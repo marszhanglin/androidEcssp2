@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC"
+    android:clickable="false" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="fh" >
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/title_btn_back_blue"
+                android:onClick="fh" />
+        </RelativeLayout>
+
+        <!-- android:text="返回"  android:textColor="#fff" android:textSize="14sp" -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="突发事件上报"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="55dp"
+        android:layout_marginTop="45dp"
+        android:clickable="false" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:orientation="vertical" >
+
+            <!-- 事件名称 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:background="#ffffff"
+                android:clickable="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dip" >
+
+                <ImageButton
+                    android:layout_width="28dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/dw_btn"
+                    android:onClick="dw" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="nameOnclick" >
+
+                    <TextView
+                        android:id="@+id/event_add_name"
+                        style="@style/title_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center_vertical"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/event_add_addr"
+                        style="@style/medium_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/event_add_name"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center_vertical"
+                        android:text="" />
+
+                    <include layout="@layout/right_image_btn" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 彩条 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/linealayout_bottom_blue" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <include layout="@layout/line" />
+                <!-- 事件类型 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:onClick="clzt" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="事件类型" />
+
+                    <TextView
+                        android:id="@+id/event_add_clzt"
+                        style="@style/medium_text"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="25dp"
+                        android:gravity="center_vertical|right"
+                        android:text="" />
+
+                    <include layout="@layout/right_image_btn" />
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+
+                <!-- 事件级别 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:onClick="sjjb" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="事件级别" />
+
+                    <TextView
+                        android:id="@+id/event_add_sjjb"
+                        style="@style/medium_text"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="25dp"
+                        android:gravity="center_vertical|right"
+                        android:text="" />
+
+                    <include layout="@layout/right_image_btn" />
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+                <!-- 报告人与电话 -->
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="报  告  人" />
+
+                    <TextView
+                        android:id="@+id/event_add_bgr"
+                        style="@style/medium_text"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="25dp"
+                        android:gravity="center_vertical|right"
+                        android:text="" />
+                    <!-- <include layout="@layout/right_image_btn"/> -->
+
+                </RelativeLayout>
+
+                <include layout="@layout/line_mlr" />
+                <!-- 描述 -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" >
+
+                    <TextView
+                        style="@style/title_text"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:text="事件描述" />
+
+                    <TextView
+                        android:id="@+id/event_add_content"
+                        style="@style/medium_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="25dp"
+                        android:gravity="center_vertical|left"
+                        android:lines="3"
+                        android:text="" />
+                    <!-- <include layout="@layout/right_image_btn"/> -->
+                </RelativeLayout>
+
+                <include layout="@layout/line" />
+            </LinearLayout>
+
+            <!-- 附件 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="14dp"
+                android:background="#ffffff"
+                android:clickable="false"
+                android:orientation="vertical" >
+
+                <include layout="@layout/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="129dp"
+                    android:clickable="false" >
+
+                    <net.evecom.androidecssp.view.gallery.GalleryFlow
+                        android:id="@+id/event_add_gallery_flow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="40dp" />
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:onClick="choose_image" >
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="19dp"
+                            android:layout_gravity="center_vertical|right"
+                            android:background="@drawable/linnelayout_r_btn_blue_addfile" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <include layout="@layout/line" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_bar_blue"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:layout_width="177dp"
+            android:layout_height="44dp"
+            android:background="@drawable/commit_btn_blue_xml"
+            android:onClick="bc" />
+    </RelativeLayout>
+
+</RelativeLayout>

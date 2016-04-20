@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC"
+    android:orientation="vertical"
+    > 
+       <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:gravity="center_vertical" >
+		<RelativeLayout 
+		    android:layout_width="70dp"
+		    android:layout_height="match_parent"
+		    android:layout_alignParentLeft="true"
+		    android:onClick="addBack"
+		    android:layout_centerVertical="true"
+		    >
+            <Button
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_btn_back_blue"
+            android:layout_marginLeft="17dp"
+             />
+       </RelativeLayout>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="事件续报"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <RelativeLayout 
+		    android:layout_width="50dp"
+		    android:layout_height="match_parent"
+		    android:layout_alignParentRight="true"
+		    android:onClick="submit"
+		    android:layout_centerVertical="true"
+		    >
+		<ImageView 
+		    android:id="@+id/contact_add_btn"
+		    android:layout_width="25dp"
+		    android:layout_height="18dp"
+		    android:background="@drawable/yes_btn"
+		    android:layout_centerVertical="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_marginRight="20dp"
+		    />
+ </RelativeLayout>
+</RelativeLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_marginTop="45dp"
+        android:clickable="false" >
+       <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="false"
+            android:orientation="vertical" >
+
+           <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:clickable="false" >
+
+            <include layout="@layout/line"/>  
+	    	<!-- 事件名称-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事件名称"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView
+                    android:id="@+id/continue_eventname_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:hint="请输入事件名称"
+                    android:textSize="15sp"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:maxLength="100"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--续报名称-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="续报名称"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <EditText
+                    android:id="@+id/continue_name_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    android:hint="请输入续报名称"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="100"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--续报时间-->
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="50dp" >
+
+               <TextView
+                   android:id="@+id/textView1"
+                   style="@style/title_text"
+                   android:layout_width="80dp"
+                   android:layout_height="match_parent"
+                   android:layout_marginLeft="10dp"
+                   android:gravity="center_vertical"
+                   android:text="续报时间" />
+
+               <TextView
+                   android:id="@+id/continue_reportdate_add"
+                   style="@style/medium_text"
+                   android:layout_width="115dp"
+                   android:layout_height="40dp"
+                   android:layout_alignParentLeft="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="90dp"
+                   android:paddingLeft="5dp"
+                   android:background="@drawable/time_btn"
+                   android:gravity="center_vertical|left"
+                   android:textSize="15sp" />
+
+               <TextView
+                   android:id="@+id/continue_reporttime_add"
+                   style="@style/medium_text"
+                   android:layout_width="115dp"
+                   android:layout_height="40dp"
+                   android:layout_centerVertical="true"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginRight="26dp"
+                   android:paddingLeft="5dp"
+                   android:background="@drawable/time_btn"
+                   android:gravity="center_vertical|left"
+                   android:textSize="15sp" />
+           </RelativeLayout>
+
+            <include layout="@layout/line_mlr"/>  
+	    	<!-- 续报类型-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp" 
+              android:onClick="continueType" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="续报类型"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView
+                    android:id="@+id/continue_type_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:hint="请输入续报类型"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="15"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/> 
+            <!-- 事发时间-->
+           <RelativeLayout
+               android:id="@+id/happen_date_block"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事发时间"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                
+               <TextView
+                   android:id="@+id/happen_date_add"
+                   style="@style/medium_text"
+                   android:layout_width="115dp"
+                   android:layout_height="40dp"
+                   android:layout_alignParentLeft="true"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="90dp"
+                   android:background="@drawable/time_btn"
+                   android:gravity="center_vertical|left"
+                   android:paddingLeft="5dp"
+                   android:textSize="15sp" />
+
+               <TextView
+                   android:id="@+id/happen_time_add"
+                   style="@style/medium_text"
+                   android:layout_width="115dp"
+                   android:layout_height="40dp"
+                   android:layout_centerVertical="true"
+                   android:layout_alignParentRight="true"
+                   android:layout_marginRight="26dp"
+                   android:background="@drawable/time_btn"
+                   android:gravity="center_vertical|left"
+                   android:paddingLeft="5dp"
+                   android:textSize="15sp" />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+            <!--续报区域-->
+           <RelativeLayout
+               android:id="@+id/happen_area_block"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:onClick="continueArea"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="所属区域"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView
+                    android:id="@+id/continue_area_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:hint="请输入所属区域"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="15"
+                    
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/> 
+	    	<!-- 事发详细地址-->
+           <RelativeLayout
+               android:id="@+id/happen_addr_block"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事发详细地址"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <EditText
+                    android:id="@+id/continue_addr_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:hint="请输入事发详细地址"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="50"
+                    />
+                <ImageButton
+                   android:layout_width="28dp"
+                   android:layout_height="35dp"
+                   android:layout_alignRight="@+id/continue_addr_add"
+                   android:layout_centerVertical="true"
+                   android:layout_alignParentRight="true"
+                   android:layout_margin="10dp"
+                   android:background="@drawable/dw_btn"
+                   android:onClick="dw" />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!-- 续报单位 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:onClick="continueDept"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="续报单位"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView
+                    android:id="@+id/continue_dept_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:hint="请输入续报单位"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="50"
+                    />
+            </RelativeLayout>
+            
+            <include layout="@layout/line_mlr"/>  
+	    	<!--事件报告人-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp" 
+              android:onClick="dept" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事件报告人"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <EditText
+                    android:id="@+id/continue_reporter_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                     android:hint="请输入事件报告人"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:maxLength="10"
+                    />
+            </RelativeLayout>   
+            <include layout="@layout/line_mlr"/> 
+            <!--事件报告人电话-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp" 
+              android:onClick="dept" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事件报告人电话"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <EditText 
+                    android:id="@+id/continue_tel_add"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                     android:hint="请输入事件报告人电话"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"   
+                    android:maxLength="12"    
+	           		android:inputType="number"
+                    />
+            </RelativeLayout> 
+           
+            <!--事件指标--> 
+            <include layout="@layout/line_mlr"/>
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="90dp" 
+              android:onClick="initDialog"> 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事件指标"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/continue_monitor_add"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    android:hint="暂无指标"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />               
+            </RelativeLayout>       
+             <include layout="@layout/line"/> 
+                            
+            </LinearLayout>   
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/continue_content_add"
+                    style="@style/medium_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/content_ed"
+                    android:gravity="left"
+                    android:hint="请输入续报内容"
+                    android:lines="4"
+                    android:padding="10dp" 
+                    android:maxLength="512"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/continue_step_add"
+                    style="@style/medium_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/content_ed"
+                    android:gravity="left"
+                    android:hint="请输入已采取措施"
+                    android:lines="4"
+                    android:padding="10dp"
+                    android:maxLength="512" />
+            </LinearLayout> 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:id="@+id/continue_remark_add"
+                    style="@style/medium_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/content_ed"
+                    android:gravity="left"
+                    android:hint="请输入备注"
+                    android:lines="4"
+                    android:padding="10dp"
+                    android:maxLength="100" />
+            </LinearLayout> 
+            <!-- 附件 -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+                <include layout="@layout/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="129dp"
+                    android:clickable="false" >
+
+                    <net.evecom.androidecssp.view.gallery.GalleryFlow
+                        android:id="@+id/event_add_gallery_flow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:onClick="chooseImage" >
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center_vertical|right"
+                            android:background="@drawable/linnelayout_r_btn_blue_addfile" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <include layout="@layout/line" />
+            </LinearLayout>
+           </LinearLayout>                
+          </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:clickable="false"  >
+
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:gravity="center_vertical"
+        android:clickable="false" >
+	<RelativeLayout 
+	    android:layout_width="70dp"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentLeft="true"
+	    android:onClick="back"
+	    android:layout_centerVertical="true">
+    <Button
+        android:onClick="fh"
+        android:layout_width="14dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/title_btn_back_blue"
+        android:layout_marginLeft="17dp"
+         />
+</RelativeLayout>
+<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="联系人信息"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+</RelativeLayout>
+        
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_marginTop="45dp"
+        android:clickable="false" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+           <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:clickable="false" >
+
+            <include layout="@layout/line"/>  
+	    	<!-- 姓名 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="联  系  人"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_name"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:textSize="15sp"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--手机  -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:onClick="callPhone"
+                > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="手        机"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"
+                    android:onClick="callPhone"/>
+                <TextView
+                    android:id="@+id/contact_phone"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:onClick="callPhone"
+                    />
+                <ImageView
+                    android:id="@+id/sendbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/contact_phone"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/send_btn" 
+                    android:onClick="sendMessage"/>
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!-- 办公室电话-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:onClick="callTel"
+                > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="电        话"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"
+                    android:onClick="callTel"/>
+                <TextView 
+                    android:id="@+id/contact_officetel"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    android:onClick="callTel"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+           <!-- 传真-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+                > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="传        真"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_fax"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+            	<!-- 集群-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:onClick="callTel"
+                > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="集        群"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_cluster"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+	    	<!-- 地址 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="地        址"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView
+                    android:id="@+id/contact_addr"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--性别 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="性        别"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_sex"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--部门 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="单        位"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_dept"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  
+	    	<!--分组-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="分        组"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/contact_group"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>  	    
+           
+             <include layout="@layout/line"/> 
+            </LinearLayout>
+            </LinearLayout>
+          </ScrollView>
+
+  
+
+</RelativeLayout>

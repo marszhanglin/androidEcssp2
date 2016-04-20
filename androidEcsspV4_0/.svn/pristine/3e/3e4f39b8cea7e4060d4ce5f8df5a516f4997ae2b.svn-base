@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    android:background="#ffffff" >
+
+   <RelativeLayout
+       android:layout_width="fill_parent"
+       android:layout_height="60dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:background="#ffffff"
+       android:gravity="center_vertical"
+       android:layout_marginBottom="1dp" >
+
+        <ImageView
+            android:id="@+id/list_item_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:scaleType="matrix"
+            android:src="@drawable/contact_group" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="matrix"
+            android:src="@drawable/mm_submenu" />
+
+        <TextView
+            android:id="@+id/contact_group_item"
+            style="@style/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/list_item_img"
+            android:padding="8dp"
+            android:text="联系人"
+            android:textSize="17sp" />
+        
+    </RelativeLayout>
+    <include layout="@layout/line_mlr"/>
+
+</LinearLayout>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:gravity="center_vertical" >
+<RelativeLayout 
+    android:layout_width="70dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:onClick="fh"
+    android:layout_centerVertical="true"
+    >
+    <Button
+            android:layout_width="14dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_btn_back_blue"
+            android:layout_marginLeft="17dp"
+             />
+</RelativeLayout>
+        
+	<!-- android:text="返回"  android:textColor="#fff" android:textSize="14sp"-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="事件上报"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="55dp"
+        android:layout_marginTop="45dp"
+        android:clickable="false"
+         >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="false" >
+
+            
+            <!-- 事件名称 -->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"  
+                android:background="#ffffff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dip"
+                android:clickable="false"
+                 >
+			<ImageButton 
+			    android:layout_width="20dp"
+			    android:layout_height="25dp"
+			    android:background="@drawable/dw_btn"
+			    android:layout_margin="10dp"
+			    android:onClick="dw"
+			    />
+			<RelativeLayout  
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:onClick="nameOnclick"
+			     >
+			  <TextView 
+			      android:id="@+id/event_add_name"
+			      android:layout_width="200dp"
+			      android:layout_height="40dp"
+			      android:text=""
+			      android:gravity="center_vertical"
+			      style="@style/title_text"
+			      />
+			     <TextView 
+			      android:id="@+id/event_add_addr"
+			      android:layout_width="200dp"
+			      android:layout_height="40dp"
+			      android:layout_below="@id/event_add_name"
+			      android:gravity="center_vertical"
+			      android:text=""
+			      style="@style/medium_text"
+			      />
+			     <include layout="@layout/right_image_btn"/>
+			</RelativeLayout>
+             
+            </LinearLayout>
+            
+            <!-- 彩条 -->
+			<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"  
+                android:background="@drawable/linealayout_bottom_blue"   > 
+            </LinearLayout>
+            
+			
+			
+			<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="14dp" 
+                android:background="#ffffff" 
+                android:orientation="vertical"  > 
+                
+		   <include layout="@layout/line"/>  
+	    	<!-- 事件级别 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:onClick="sjjb" > 
+                <TextView 
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="事件级别"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/event_add_sjjb"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:text=""
+                    android:gravity="center_vertical|right"
+                    style="@style/medium_text"
+                    />
+			    <include layout="@layout/right_image_btn"/>
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+            <!-- 处理状态 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:onClick="clzt"> 
+                <TextView 
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="处理状态"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/event_add_clzt"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:text=""
+                    android:gravity="center_vertical|right"
+                    style="@style/medium_text"
+                    />
+			    <include layout="@layout/right_image_btn"/> 
+            </RelativeLayout> 
+            <include layout="@layout/line_mlr"/>
+            <!-- 报告人与电话 -->
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="报  告  人"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/event_add_bgr"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:text=""
+                    android:gravity="center_vertical|right"
+                    style="@style/medium_text"
+                    />
+			    <!-- <include layout="@layout/right_image_btn"/>  -->
+			    
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/> 
+            <!-- 描述 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"      > 
+                <TextView 
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="事件描述"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+			    <TextView 
+                    android:id="@+id/event_add_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:text=""
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:lines="3"
+                    />
+			    <!-- <include layout="@layout/right_image_btn"/>  -->
+            </RelativeLayout>
+			    
+			<include layout="@layout/line"/>  
+            </LinearLayout> 
+            
+			
+			<!-- 附件 -->
+			<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="130dp" 
+                android:layout_marginTop="14dp" 
+                android:background="#ffffff" 
+                android:orientation="vertical" 
+                android:clickable="false" > 
+                <include layout="@layout/line"/> 
+                <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="129dp" 
+                android:clickable="false"     >
+                    <net.evecom.androidecssp.view.gallery.GalleryFlow
+				        android:id="@+id/event_add_gallery_flow"
+				        android:layout_width="match_parent"
+				        android:layout_height="match_parent"
+				        android:layout_marginRight="25dp"/>
+                    <LinearLayout 
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true" 
+                        android:onClick="choose_image"
+                        >
+				    <ImageView 
+			         android:layout_width="10dp"
+			         android:layout_height="16dp"
+			         android:background="@drawable/linnelayout_r_btn_blue"
+			         android:layout_gravity="center_vertical|right"
+			         /></LinearLayout>
+                </RelativeLayout>
+                <include layout="@layout/line"/> 
+                </LinearLayout>
+			
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_bar_blue"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+
+            <ImageButton
+                android:layout_width="177dp"
+                android:layout_height="44dp"
+                android:background="@drawable/commit_btn_blue"
+                android:onClick="bc" />
+             
+    </RelativeLayout>
+
+</RelativeLayout>

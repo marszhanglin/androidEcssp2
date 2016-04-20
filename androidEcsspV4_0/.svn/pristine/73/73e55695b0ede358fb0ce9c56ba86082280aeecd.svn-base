@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EFEEEC"
+    android:clickable="false" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar_blue"
+        android:clickable="false"
+        android:gravity="center_vertical" >
+
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="fh" >
+
+            <Button
+                android:layout_width="14dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/title_btn_back_blue"
+                android:onClick="fh" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="资源信息"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+	
+	
+	
+	    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="55dp"
+        android:clickable="false" > 
+             <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:clickable="false" >
+
+            <include layout="@layout/line"/>  
+	    	<!-- 资源名称 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp"  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="资源名称"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_name_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+			<!-- 所属部门   -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp"> 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="所属部门"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_dept_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+			
+			<!--资源数量 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" 
+              android:id="@+id/taskadd_taskeffi_ll"
+			  > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="资源数量"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_num_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" 
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <include layout="@layout/line_mlr"/>
+			<!-- 资源类型 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="资源类型"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_type_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            
+           
+           <include layout="@layout/line_mlr"/>
+			<!-- 联系电话 -->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="联系电话"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_phone_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+            <!-- 资源区域-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="资源区域"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_area_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout>
+           
+           <include layout="@layout/line_mlr"/>	
+            <!-- 资源地址-->
+           <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="资源地址"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/resource_addr_tv"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical|left"
+                    style="@style/medium_text" 
+                    android:background="#ffffff"
+                    android:layout_marginLeft="90dp" 
+                    />
+            </RelativeLayout> 
+             
+            <include layout="@layout/line"/>  
+        </LinearLayout>
+        
+           
+       
+    </ScrollView> 
+
+</RelativeLayout>

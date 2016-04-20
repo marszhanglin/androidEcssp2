@@ -1,0 +1,265 @@
+/*
+ * Copyright (c) 2005, 2014, EVECOM Technology Co.,Ltd. All rights reserved.
+ * EVECOM PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 
+ */
+package net.evecom.androidecssp.activity.event;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.evecom.androidecssp.R;
+import net.evecom.androidecssp.activity.taskresponse.ProjectListActivity;
+import net.evecom.androidecssp.base.AfnailPictureActivity;
+import net.evecom.androidecssp.base.BaseActivity;
+import net.evecom.androidecssp.base.BaseModel;
+import net.evecom.androidecssp.bean.FileManageBean;
+import net.evecom.androidecssp.util.HttpUtil;
+import net.evecom.androidecssp.view.gallery.GalleryFlow;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
+
+/**
+ * 
+ * 描述 事件详细信息
+ * 
+ * @author Mars zhang
+ * @created 2015-11-12 上午10:13:17
+ */
+public class EventInfoActivity extends BaseActivity {
+    /** MemberVariables */
+    private List<FileManageBean> filebeans = new ArrayList<FileManageBean>();
+    /** MemberVariables */
+    GalleryFlow mGallery = null;
+    /** MemberVariables */
+    private TextView nameTV;// event_add_name
+    /** MemberVariables */
+    private TextView addrTV;// event_add_addr
+    /** MemberVariables */
+    private TextView sjjbTV;// event_add_sjjb
+    /** MemberVariables */
+    private TextView clztTV;// event_add_clzt
+    /** MemberVariables */
+    private TextView bgrTV;// event_add_bgr
+    /** MemberVariables */
+    private TextView contentTV;// event_add_content
+    /** MemberVariables */
+    private BaseModel eventInfo = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.event_info_activity);
+        FileManageBean bean = new FileManageBean();
+        bean.setFile_URL(HttpUtil.getPCURL() + "upload/upload/event/9afd3da6-0110-4433-9b1b-b682f5fc3425.jpg");
+        filebeans.add(bean);
+        initdata();
+        initView();
+        initViewData();
+    }
+
+    /**
+     * 
+     * 描述 initViewData
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 上午10:22:52
+     */
+    private void initViewData() {
+        contentTV = (TextView) findViewById(R.id.event_add_content);
+        nameTV.setText(eventInfo.getStr("eventname"));
+        addrTV.setText(eventInfo.getStr("happenaddress"));
+        bgrTV.setText(eventInfo.getStr("reporterperson") + "-" + eventInfo.getStr("reportertel"));
+        contentTV.setText(eventInfo.getStr("eventname"));
+        setDictNameByValueToView("SUDDENEVENT_LEVEL", eventInfo.getStr("eventlever"), sjjbTV);
+        setDictNameByValueToView("EVENT_DEAL_STATUS", eventInfo.getStr("eventstatus"), clztTV);
+        /*
+         * new Thread(new Runnable() {
+         * 
+         * @Override public void run() { HashMap<String, String> entityMap=new
+         * HashMap<String, String>(); entityMap.put("eventid",
+         * eventInfo.getStr("id")); try { String result=
+         * connServerForResultPost(
+         * "/jfs/ecssp/mobile/eventCtr/getImagesByEventId",entityMap); } catch
+         * (ClientProtocolException e) { } catch (IOException e) { } } });
+         */
+    }
+
+    /**
+     * 
+     * 描述 initView
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 上午10:23:26
+     */
+    private void initView() {
+        initGallery();
+        nameTV = (TextView) findViewById(R.id.event_add_name);
+        addrTV = (TextView) findViewById(R.id.event_add_addr);
+        sjjbTV = (TextView) findViewById(R.id.event_add_sjjb);
+        clztTV = (TextView) findViewById(R.id.event_add_clzt);
+        bgrTV = (TextView) findViewById(R.id.event_add_bgr);
+
+    }
+
+    /**
+     * 
+     * 描述 初始化数据
+     * 
+     * @author Mars zhang
+     * @created 2015-11-23 下午5:32:52
+     */
+    private void initdata() {
+        Intent intent = getIntent();
+        eventInfo = (BaseModel) getData("eventInfo", intent);
+        clearFilesRecord();
+    }
+
+    /**
+     * 
+     * 描述 初始化界面时清空数据库文件记录
+     * 
+     * @author Mars zhang
+     * @created 2015-11-23 上午9:50:22
+     */
+    private void clearFilesRecord() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getDb().deleteAll(FileManageBean.class);
+            }
+        }).start();
+    }
+
+    /**
+     * 
+     * 描述 初始化gallery
+     * 
+     * @author Mars zhang
+     * @created 2015-11-19 上午10:55:25
+     */
+    private void initGallery() {
+        mGallery = (GalleryFlow) findViewById(R.id.event_add_gallery_flow);
+        mGallery.setBackgroundColor(Color.parseColor("#ffffff")); // 背景色
+        mGallery.setSpacing(90);// 间距
+        mGallery.setMaxRotationAngle(20);// 设置倾斜角度
+        mGallery.setFadingEdgeLength(10); // 边框渐变宽度
+        mGallery.setGravity(Gravity.CENTER_VERTICAL); // 设置对齐方式
+        mGallery.setAdapter(new GalleryAdapter());
+        mGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), AfnailPictureActivity.class);
+                BaseActivity.pushObjData("filebean", filebeans.get(position), intent);
+                startActivityForResult(intent, R.layout.afnail_picture_activity);
+            }
+        });
+    }
+
+    /**
+     * 
+     * 描述 刷新gallery画廊
+     * 
+     * @author Mars zhang
+     * @created 2015-11-19 上午11:13:14
+     */
+    private void updateGallery() {
+        ((GalleryAdapter) mGallery.getAdapter()).notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1: // 图片界面
+                break;
+            case R.layout.afnail_picture_activity: // 图片预览 在预览处不要有删除 耗性能
+
+                break;
+            case 3: // 定位界面
+
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * 
+     * 描述 事件位置
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 上午9:25:12
+     * @param view
+     */
+    public void nowdw(View view) {
+
+    }
+
+    /**
+     * 
+     * 描述 处置点击
+     * 
+     * @author Mars zhang
+     * @created 2015-11-25 上午9:25:12
+     * @param view
+     */
+    public void cz(View view) {
+        Intent intent = new Intent(instance, ProjectListActivity.class);
+        ProjectListActivity.pushData("eventInfo", eventInfo, intent);
+        startActivity(intent);
+    }
+
+    /**
+     * 
+     * 描述 gallery的适配器
+     * 
+     * @author Mars zhang
+     * @created 2015-11-19 上午11:05:15
+     */
+    private class GalleryAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return filebeans.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (null == convertView) {
+                convertView = new ImageView(instance);
+                convertView.setLayoutParams(new Gallery.LayoutParams(160, 240));// 控件的大小
+            }
+            ImageView imageView = (ImageView) convertView;
+            displayImage(imageView, filebeans.get(position).getFile_URL());
+            imageView.setScaleType(ScaleType.FIT_XY);
+            return imageView;
+        }
+    }
+
+}

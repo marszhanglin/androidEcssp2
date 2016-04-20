@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#00000000"
+    android:orientation="vertical" > 
+    <include layout="@layout/line_mlr"/>
+            <!-- 动态添加的item -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp" > 
+                <TextView 
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:id="@+id/item_line_tv_tv_titletextviewid"
+                    android:layout_marginLeft="10dp"
+                    style="@style/title_text"/>
+                <TextView 
+                    android:id="@+id/item_line_tv_tv_valuetextviewid"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp" 
+                    android:gravity="center_vertical|right"
+                    style="@style/medium_text"
+                    /> 
+            </RelativeLayout> 
+</LinearLayout>

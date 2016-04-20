@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/main_menu_textstyle_msg"
+    android:id="@+id/mainenu_item_tv_id"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"   >
+
+</TextView>
